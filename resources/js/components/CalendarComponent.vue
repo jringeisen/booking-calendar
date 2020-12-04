@@ -1,19 +1,6 @@
 <template>
 <div class="flex w-full">
-  <div class="w-1/3 mr-3 p-4">
-    <h1 class="text-lg font-semibold">Available Times</h1>
-    <div id="draggable">
-        <p class="item-class rounded-md bg-blue-400 px-2 cursor-pointer">8:00 AM</p>
-        <p class="item-class rounded-md bg-blue-400 px-2 mt-1 cursor-pointer">9:00 AM</p>
-        <p class="item-class rounded-md bg-blue-400 px-2 mt-1 cursor-pointer">10:00 AM</p>
-        <p class="item-class rounded-md bg-blue-400 px-2 mt-1 cursor-pointer">11:00 AM</p>
-        <p class="item-class rounded-md bg-blue-400 px-2 mt-1 cursor-pointer">12:00 PM</p>
-        <p class="item-class rounded-md bg-blue-400 px-2 mt-1 cursor-pointer">1:00 PM</p>
-    </div>
-  </div>
-  <div class="w-2/3">
     <FullCalendar :options="calendarOptions" />
-  </div>
 </div>
 </template>
 
@@ -38,31 +25,88 @@ export default {
         eventDrop: this.handleEventDrop,
         eventClick: this.handleEventClick,
         drop: this.handleDrop,
-        editable: true,
         dayMaxEventRows: 4,
+        eventTimeFormat: { // like '14:30:00'
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: true
+        },
         events: [
-          { title: 'event 1', date: '2020-12-06' },
-          { title: 'event 2', date: '2020-12-06' },
-          { title: 'event 3', date: '2020-12-06' },
-          { title: 'event 4', date: '2020-12-06' },
-          { title: 'event 5', date: '2020-12-06' },
-          { title: 'event 6', date: '2020-12-06' },
-          { title: 'event 7', date: '2020-12-06' },
-          { title: 'event 8', date: '2020-12-06' }
+          {
+            daysOfWeek: [ '1' ],
+            classNames: 'cursor-pointer',
+            startRecur: '2020-12-01',
+            endRecur: '2020-12-30',
+            startTime: '08:00:00',
+            endTime: '09:00:00',
+            display: 'block',
+            backgroundColor: 'rgba(139, 92, 246, var(--tw-bg-opacity))',
+            borderColor: 'rgba(139, 92, 246, var(--tw-bg-opacity))'
+          },
+          {
+            daysOfWeek: [ '1' ],
+            classNames: 'cursor-pointer',
+            startRecur: '2020-12-01',
+            endRecur: '2020-12-30',
+            startTime: '09:00:00',
+            endTime: '10:00:00',
+            display: 'block',
+            backgroundColor: 'rgba(99, 102, 241, var(--tw-bg-opacity))',
+            borderColor: 'rgba(99, 102, 241, var(--tw-bg-opacity))'
+          },
+          {
+            daysOfWeek: [ '1' ],
+            classNames: 'cursor-pointer',
+            startRecur: '2020-12-01',
+            endRecur: '2020-12-30',
+            startTime: '12:00:00',
+            endTime: '13:00:00',
+            display: 'block',
+            backgroundColor: 'rgba(59, 130, 246, var(--tw-bg-opacity))',
+            borderColor: 'rgba(59, 130, 246, var(--tw-bg-opacity))'
+          },
+          {
+            daysOfWeek: [ '2' ],
+            classNames: 'cursor-pointer',
+            startRecur: '2020-12-01',
+            endRecur: '2020-12-30',
+            startTime: '08:00:00',
+            endTime: '09:00:00',
+            display: 'block',
+            backgroundColor: 'rgba(139, 92, 246, var(--tw-bg-opacity))',
+            borderColor: 'rgba(139, 92, 246, var(--tw-bg-opacity))'
+          },
+          {
+            daysOfWeek: [ '2' ],
+            classNames: 'cursor-pointer',
+            startRecur: '2020-12-01',
+            endRecur: '2020-12-30',
+            startTime: '09:00:00',
+            endTime: '10:00:00',
+            display: 'block',
+            backgroundColor: 'rgba(99, 102, 241, var(--tw-bg-opacity))',
+            borderColor: 'rgba(99, 102, 241, var(--tw-bg-opacity))'
+          },
+          {
+            daysOfWeek: [ '2' ],
+            classNames: 'cursor-pointer',
+            startRecur: '2020-12-01',
+            endRecur: '2020-12-30',
+            startTime: '12:00:00',
+            endTime: '13:00:00',
+            display: 'block',
+            backgroundColor: 'rgba(59, 130, 246, var(--tw-bg-opacity))',
+            borderColor: 'rgba(59, 130, 246, var(--tw-bg-opacity))'
+          }
         ]
       }
     }
   },
 
-  mounted () {
-    let draggableEl = document.getElementById('draggable');
-    new Draggable(draggableEl, {
-      itemSelector: '.item-class'
-    })
-  },
-
   methods: {
       handleDateClick (date) {
+          alert(date.dateStr)
           // handle the date click.
       },
 
@@ -72,10 +116,12 @@ export default {
       },
 
       handleEventClick (event) {
+          console.log(event)
+          alert('start: ' + event.event.startStr + ' end: ' + event.event.endStr)
           // method to handle when an event has been clicked.
       },
 
-      handleDrop (event) {
+      handleDrop (data) {
         // method to handle outside event thats dropped on calendar.
       }
   }

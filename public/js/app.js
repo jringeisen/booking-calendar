@@ -19071,19 +19071,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -19102,51 +19089,90 @@ __webpack_require__.r(__webpack_exports__);
         eventDrop: this.handleEventDrop,
         eventClick: this.handleEventClick,
         drop: this.handleDrop,
-        editable: true,
         dayMaxEventRows: 4,
+        eventTimeFormat: {
+          // like '14:30:00'
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: true
+        },
         events: [{
-          title: 'event 1',
-          date: '2020-12-06'
+          daysOfWeek: ['1'],
+          classNames: 'cursor-pointer',
+          startRecur: '2020-12-01',
+          endRecur: '2020-12-30',
+          startTime: '08:00:00',
+          endTime: '09:00:00',
+          display: 'block',
+          backgroundColor: 'rgba(139, 92, 246, var(--tw-bg-opacity))',
+          borderColor: 'rgba(139, 92, 246, var(--tw-bg-opacity))'
         }, {
-          title: 'event 2',
-          date: '2020-12-06'
+          daysOfWeek: ['1'],
+          classNames: 'cursor-pointer',
+          startRecur: '2020-12-01',
+          endRecur: '2020-12-30',
+          startTime: '09:00:00',
+          endTime: '10:00:00',
+          display: 'block',
+          backgroundColor: 'rgba(99, 102, 241, var(--tw-bg-opacity))',
+          borderColor: 'rgba(99, 102, 241, var(--tw-bg-opacity))'
         }, {
-          title: 'event 3',
-          date: '2020-12-06'
+          daysOfWeek: ['1'],
+          classNames: 'cursor-pointer',
+          startRecur: '2020-12-01',
+          endRecur: '2020-12-30',
+          startTime: '12:00:00',
+          endTime: '13:00:00',
+          display: 'block',
+          backgroundColor: 'rgba(59, 130, 246, var(--tw-bg-opacity))',
+          borderColor: 'rgba(59, 130, 246, var(--tw-bg-opacity))'
         }, {
-          title: 'event 4',
-          date: '2020-12-06'
+          daysOfWeek: ['2'],
+          classNames: 'cursor-pointer',
+          startRecur: '2020-12-01',
+          endRecur: '2020-12-30',
+          startTime: '08:00:00',
+          endTime: '09:00:00',
+          display: 'block',
+          backgroundColor: 'rgba(139, 92, 246, var(--tw-bg-opacity))',
+          borderColor: 'rgba(139, 92, 246, var(--tw-bg-opacity))'
         }, {
-          title: 'event 5',
-          date: '2020-12-06'
+          daysOfWeek: ['2'],
+          classNames: 'cursor-pointer',
+          startRecur: '2020-12-01',
+          endRecur: '2020-12-30',
+          startTime: '09:00:00',
+          endTime: '10:00:00',
+          display: 'block',
+          backgroundColor: 'rgba(99, 102, 241, var(--tw-bg-opacity))',
+          borderColor: 'rgba(99, 102, 241, var(--tw-bg-opacity))'
         }, {
-          title: 'event 6',
-          date: '2020-12-06'
-        }, {
-          title: 'event 7',
-          date: '2020-12-06'
-        }, {
-          title: 'event 8',
-          date: '2020-12-06'
+          daysOfWeek: ['2'],
+          classNames: 'cursor-pointer',
+          startRecur: '2020-12-01',
+          endRecur: '2020-12-30',
+          startTime: '12:00:00',
+          endTime: '13:00:00',
+          display: 'block',
+          backgroundColor: 'rgba(59, 130, 246, var(--tw-bg-opacity))',
+          borderColor: 'rgba(59, 130, 246, var(--tw-bg-opacity))'
         }]
       }
     };
   },
-  mounted: function mounted() {
-    var draggableEl = document.getElementById('draggable');
-    new _fullcalendar_interaction__WEBPACK_IMPORTED_MODULE_2__["Draggable"](draggableEl, {
-      itemSelector: '.item-class'
-    });
-  },
   methods: {
-    handleDateClick: function handleDateClick(date) {// handle the date click.
+    handleDateClick: function handleDateClick(date) {
+      alert(date.dateStr); // handle the date click.
     },
     handleEventDrop: function handleEventDrop(event) {
       console.log(event); // method to handle when an event has been dropped.
     },
-    handleEventClick: function handleEventClick(event) {// method to handle when an event has been clicked.
+    handleEventClick: function handleEventClick(event) {
+      console.log(event);
+      alert('start: ' + event.event.startStr + ' end: ' + event.event.endStr); // method to handle when an event has been clicked.
     },
-    handleDrop: function handleDrop(event) {// method to handle outside event thats dropped on calendar.
+    handleDrop: function handleDrop(data) {// method to handle outside event thats dropped on calendar.
     }
   }
 });
@@ -37463,84 +37489,14 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "flex w-full" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "w-2/3" },
-      [_c("FullCalendar", { attrs: { options: _vm.calendarOptions } })],
-      1
-    )
-  ])
+  return _c(
+    "div",
+    { staticClass: "flex w-full" },
+    [_c("FullCalendar", { attrs: { options: _vm.calendarOptions } })],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-1/3 mr-3 p-4" }, [
-      _c("h1", { staticClass: "text-lg font-semibold" }, [
-        _vm._v("Available Times")
-      ]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "draggable" } }, [
-        _c(
-          "p",
-          {
-            staticClass: "item-class rounded-md bg-blue-400 px-2 cursor-pointer"
-          },
-          [_vm._v("8:00 AM")]
-        ),
-        _vm._v(" "),
-        _c(
-          "p",
-          {
-            staticClass:
-              "item-class rounded-md bg-blue-400 px-2 mt-1 cursor-pointer"
-          },
-          [_vm._v("9:00 AM")]
-        ),
-        _vm._v(" "),
-        _c(
-          "p",
-          {
-            staticClass:
-              "item-class rounded-md bg-blue-400 px-2 mt-1 cursor-pointer"
-          },
-          [_vm._v("10:00 AM")]
-        ),
-        _vm._v(" "),
-        _c(
-          "p",
-          {
-            staticClass:
-              "item-class rounded-md bg-blue-400 px-2 mt-1 cursor-pointer"
-          },
-          [_vm._v("11:00 AM")]
-        ),
-        _vm._v(" "),
-        _c(
-          "p",
-          {
-            staticClass:
-              "item-class rounded-md bg-blue-400 px-2 mt-1 cursor-pointer"
-          },
-          [_vm._v("12:00 PM")]
-        ),
-        _vm._v(" "),
-        _c(
-          "p",
-          {
-            staticClass:
-              "item-class rounded-md bg-blue-400 px-2 mt-1 cursor-pointer"
-          },
-          [_vm._v("1:00 PM")]
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -49887,8 +49843,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/jonathonringeisen/www/socialpost/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/jonathonringeisen/www/socialpost/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! /Users/jonathonringeisen/www/booking-calendar/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/jonathonringeisen/www/booking-calendar/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })
