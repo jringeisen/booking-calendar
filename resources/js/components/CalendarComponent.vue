@@ -1,5 +1,6 @@
 <template>
 <div class="flex w-full">
+    <add-to-calendar-modal />
     <FullCalendar :options="calendarOptions" />
 </div>
 </template>
@@ -7,10 +8,12 @@
 <script>
 import FullCalendar from '@fullcalendar/vue'
 import dayGridPlugin from '@fullcalendar/daygrid'
+import AddToCalendarModal from './AddToCalendarModal'
 
 export default {
   components: {
-    FullCalendar
+    FullCalendar,
+    AddToCalendarModal
   },
 
   data() {
