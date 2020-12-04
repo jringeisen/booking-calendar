@@ -7,7 +7,6 @@
 <script>
 import FullCalendar from '@fullcalendar/vue'
 import dayGridPlugin from '@fullcalendar/daygrid'
-import interactionPlugin, { Draggable } from '@fullcalendar/interaction'
 
 export default {
   components: {
@@ -17,16 +16,24 @@ export default {
   data() {
     return {
       calendarOptions: {
-        plugins: [ dayGridPlugin, interactionPlugin ],
-        droppable: true,
+        plugins: [ dayGridPlugin ],
         initialView: 'dayGridMonth',
         height: 'auto',
         dateClick: this.handleDateClick,
         eventDrop: this.handleEventDrop,
         eventClick: this.handleEventClick,
-        drop: this.handleDrop,
         dayMaxEventRows: 4,
-        eventTimeFormat: { // like '14:30:00'
+        customButtons: {
+          addToCalendar: {
+            text: 'Add Time',
+            click: this.handleAddToCalendar
+          }
+        },
+        headerToolbar: {
+          left: 'title',
+          right: 'addToCalendar today prev,next'
+        },
+        eventTimeFormat: {
           hour: '2-digit',
           minute: '2-digit',
           second: '2-digit',
@@ -123,6 +130,10 @@ export default {
 
       handleDrop (data) {
         // method to handle outside event thats dropped on calendar.
+      },
+
+      handleAddToCalendar () {
+        alert('Add time button clicked!')
       }
   }
 }
