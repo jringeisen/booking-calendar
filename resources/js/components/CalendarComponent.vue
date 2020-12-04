@@ -18,6 +18,8 @@ export default {
 
   data() {
     return {
+      events: {},
+      isVisible: false,
       calendarOptions: {
         plugins: [ dayGridPlugin ],
         initialView: 'dayGridMonth',
@@ -29,7 +31,7 @@ export default {
         customButtons: {
           addToCalendar: {
             text: 'Add Time',
-            click: this.handleAddToCalendar
+            click: this.addToCalendarClicked
           }
         },
         headerToolbar: {
@@ -53,61 +55,6 @@ export default {
             display: 'block',
             backgroundColor: 'rgba(139, 92, 246, var(--tw-bg-opacity))',
             borderColor: 'rgba(139, 92, 246, var(--tw-bg-opacity))'
-          },
-          {
-            daysOfWeek: [ '1' ],
-            classNames: 'cursor-pointer',
-            startRecur: '2020-12-01',
-            endRecur: '2020-12-30',
-            startTime: '09:00:00',
-            endTime: '10:00:00',
-            display: 'block',
-            backgroundColor: 'rgba(99, 102, 241, var(--tw-bg-opacity))',
-            borderColor: 'rgba(99, 102, 241, var(--tw-bg-opacity))'
-          },
-          {
-            daysOfWeek: [ '1' ],
-            classNames: 'cursor-pointer',
-            startRecur: '2020-12-01',
-            endRecur: '2020-12-30',
-            startTime: '12:00:00',
-            endTime: '13:00:00',
-            display: 'block',
-            backgroundColor: 'rgba(59, 130, 246, var(--tw-bg-opacity))',
-            borderColor: 'rgba(59, 130, 246, var(--tw-bg-opacity))'
-          },
-          {
-            daysOfWeek: [ '2' ],
-            classNames: 'cursor-pointer',
-            startRecur: '2020-12-01',
-            endRecur: '2020-12-30',
-            startTime: '08:00:00',
-            endTime: '09:00:00',
-            display: 'block',
-            backgroundColor: 'rgba(139, 92, 246, var(--tw-bg-opacity))',
-            borderColor: 'rgba(139, 92, 246, var(--tw-bg-opacity))'
-          },
-          {
-            daysOfWeek: [ '2' ],
-            classNames: 'cursor-pointer',
-            startRecur: '2020-12-01',
-            endRecur: '2020-12-30',
-            startTime: '09:00:00',
-            endTime: '10:00:00',
-            display: 'block',
-            backgroundColor: 'rgba(99, 102, 241, var(--tw-bg-opacity))',
-            borderColor: 'rgba(99, 102, 241, var(--tw-bg-opacity))'
-          },
-          {
-            daysOfWeek: [ '2' ],
-            classNames: 'cursor-pointer',
-            startRecur: '2020-12-01',
-            endRecur: '2020-12-30',
-            startTime: '12:00:00',
-            endTime: '13:00:00',
-            display: 'block',
-            backgroundColor: 'rgba(59, 130, 246, var(--tw-bg-opacity))',
-            borderColor: 'rgba(59, 130, 246, var(--tw-bg-opacity))'
           }
         ]
       }
@@ -135,8 +82,8 @@ export default {
         // method to handle outside event thats dropped on calendar.
       },
 
-      handleAddToCalendar () {
-        alert('Add time button clicked!')
+      addToCalendarClicked () {
+        this.$root.$emit('display::modal')
       }
   }
 }

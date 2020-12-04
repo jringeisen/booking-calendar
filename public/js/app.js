@@ -16637,11 +16637,81 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    size: {
+      type: String,
+      required: false,
+      "default": 'max-w-4xl'
+    }
+  },
   data: function data() {
     return {
+      formData: {},
       isModalVisible: false
     };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$root.$on('display::modal', function () {
+      _this.isModalVisible = true;
+    });
+  },
+  methods: {
+    submit: function submit() {// submit to an endpoint and save in the database.
+    }
   }
 });
 
@@ -16676,6 +16746,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      events: {},
+      isVisible: false,
       calendarOptions: {
         plugins: [_fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_1__["default"]],
         initialView: 'dayGridMonth',
@@ -16687,7 +16759,7 @@ __webpack_require__.r(__webpack_exports__);
         customButtons: {
           addToCalendar: {
             text: 'Add Time',
-            click: this.handleAddToCalendar
+            click: this.addToCalendarClicked
           }
         },
         headerToolbar: {
@@ -16710,56 +16782,6 @@ __webpack_require__.r(__webpack_exports__);
           display: 'block',
           backgroundColor: 'rgba(139, 92, 246, var(--tw-bg-opacity))',
           borderColor: 'rgba(139, 92, 246, var(--tw-bg-opacity))'
-        }, {
-          daysOfWeek: ['1'],
-          classNames: 'cursor-pointer',
-          startRecur: '2020-12-01',
-          endRecur: '2020-12-30',
-          startTime: '09:00:00',
-          endTime: '10:00:00',
-          display: 'block',
-          backgroundColor: 'rgba(99, 102, 241, var(--tw-bg-opacity))',
-          borderColor: 'rgba(99, 102, 241, var(--tw-bg-opacity))'
-        }, {
-          daysOfWeek: ['1'],
-          classNames: 'cursor-pointer',
-          startRecur: '2020-12-01',
-          endRecur: '2020-12-30',
-          startTime: '12:00:00',
-          endTime: '13:00:00',
-          display: 'block',
-          backgroundColor: 'rgba(59, 130, 246, var(--tw-bg-opacity))',
-          borderColor: 'rgba(59, 130, 246, var(--tw-bg-opacity))'
-        }, {
-          daysOfWeek: ['2'],
-          classNames: 'cursor-pointer',
-          startRecur: '2020-12-01',
-          endRecur: '2020-12-30',
-          startTime: '08:00:00',
-          endTime: '09:00:00',
-          display: 'block',
-          backgroundColor: 'rgba(139, 92, 246, var(--tw-bg-opacity))',
-          borderColor: 'rgba(139, 92, 246, var(--tw-bg-opacity))'
-        }, {
-          daysOfWeek: ['2'],
-          classNames: 'cursor-pointer',
-          startRecur: '2020-12-01',
-          endRecur: '2020-12-30',
-          startTime: '09:00:00',
-          endTime: '10:00:00',
-          display: 'block',
-          backgroundColor: 'rgba(99, 102, 241, var(--tw-bg-opacity))',
-          borderColor: 'rgba(99, 102, 241, var(--tw-bg-opacity))'
-        }, {
-          daysOfWeek: ['2'],
-          classNames: 'cursor-pointer',
-          startRecur: '2020-12-01',
-          endRecur: '2020-12-30',
-          startTime: '12:00:00',
-          endTime: '13:00:00',
-          display: 'block',
-          backgroundColor: 'rgba(59, 130, 246, var(--tw-bg-opacity))',
-          borderColor: 'rgba(59, 130, 246, var(--tw-bg-opacity))'
         }]
       }
     };
@@ -16777,8 +16799,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     handleDrop: function handleDrop(data) {// method to handle outside event thats dropped on calendar.
     },
-    handleAddToCalendar: function handleAddToCalendar() {
-      alert('Add time button clicked!');
+    addToCalendarClicked: function addToCalendarClicked() {
+      this.$root.$emit('display::modal');
     }
   }
 });
@@ -35095,46 +35117,339 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "z-50 fixed top-0 left-0 w-full h-full flex items-center shadow-lg overflow-y-auto",
-        staticStyle: { "background-color": "rgba(0,0,0,.5)" }
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass: "container mx-auto lg:px-32 rounded-lg overflow-y-auto"
-          },
-          [
-            _c("div", { staticClass: "bg-gray-200 shadow-lg rounded" }, [
-              _c("div", { staticClass: "flex justify-end pr-4 pt-2" }, [
-                _c(
-                  "button",
-                  { staticClass: "text-3xl leading-none hover:text-gray-300" },
-                  [_vm._v("×")]
-                )
+  return _vm.isModalVisible
+    ? _c(
+        "div",
+        {
+          staticClass:
+            "z-50 fixed top-0 left-0 w-full h-full flex items-center shadow-lg overflow-y-auto",
+          staticStyle: { "background-color": "rgba(0,0,0,.5)" }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass:
+                "container mx-auto lg:px-32 rounded-lg overflow-y-auto",
+              class: _vm.size
+            },
+            [
+              _c("div", { staticClass: "bg-white shadow-lg rounded-t-lg" }, [
+                _c("div", { staticClass: "modal-body px-8 py-8" }, [
+                  _c("div", { staticClass: "flex items-center w-full" }, [
+                    _c("div", { staticClass: "w-1/2 mr-2" }, [
+                      _c("label", { staticClass: "text-sm" }, [
+                        _vm._v("Start Recurring Date")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formData.startRecur,
+                              expression: "formData.startRecur"
+                            }
+                          ],
+                          staticClass:
+                            "rounded-md w-full border-gray-300 shadow text-sm text-gray-500 focus:ring focus:ring-blue-300",
+                          attrs: {
+                            type: "date",
+                            placeholder: "Format 2020-01-01"
+                          },
+                          domProps: { value: _vm.formData.startRecur },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.formData,
+                                "startRecur",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "w-1/2" }, [
+                      _c("label", { staticClass: "text-sm" }, [
+                        _vm._v("End Recurring Date")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formData.endRecur,
+                              expression: "formData.endRecur"
+                            }
+                          ],
+                          staticClass:
+                            "rounded-md w-full border-gray-300 shadow text-sm text-gray-500 focus:ring focus:ring-blue-300",
+                          attrs: {
+                            type: "date",
+                            placeholder: "Form 2020-01-01"
+                          },
+                          domProps: { value: _vm.formData.endRecur },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.formData,
+                                "endRecur",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "flex items-center w-full mt-2" }, [
+                    _c("div", { staticClass: "w-1/2 mr-2" }, [
+                      _c("label", { staticClass: "text-sm" }, [
+                        _vm._v("Start Time")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formData.startTime,
+                              expression: "formData.startTime"
+                            }
+                          ],
+                          staticClass:
+                            "rounded-md w-full border-gray-300 shadow text-sm text-gray-500 focus:ring focus:ring-blue-300",
+                          attrs: {
+                            type: "time",
+                            placeholder: "ex. 08:00:00 or 13:00:00"
+                          },
+                          domProps: { value: _vm.formData.startTime },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.formData,
+                                "startTime",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "w-1/2" }, [
+                      _c("label", { staticClass: "text-sm" }, [
+                        _vm._v("End Time")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formData.endTime,
+                              expression: "formData.endTime"
+                            }
+                          ],
+                          staticClass:
+                            "rounded-md w-full border-gray-300 shadow text-sm text-gray-500 focus:ring focus:ring-blue-300",
+                          attrs: {
+                            type: "time",
+                            placeholder: "Enter end time."
+                          },
+                          domProps: { value: _vm.formData.endTime },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.formData,
+                                "endTime",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "flex items-center w-full mt-8" }, [
+                    _c("div", { staticClass: "w-1/3 mr-2" }, [
+                      _c("label", { staticClass: "text-sm" }, [
+                        _vm._v("Day of week to be applied")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formData.daysOfWeek,
+                              expression: "formData.daysOfWeek"
+                            }
+                          ],
+                          staticClass:
+                            "rounded-md w-full border-gray-300 shadow text-sm focus:ring focus:ring-blue-300",
+                          attrs: {
+                            type: "number",
+                            placeholder: "Enter a number 0-6"
+                          },
+                          domProps: { value: _vm.formData.daysOfWeek },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.formData,
+                                "daysOfWeek",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "w-1/3 mr-2" }, [
+                      _c("label", { staticClass: "text-sm" }, [
+                        _vm._v("Background Color")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formData.backgroundColor,
+                              expression: "formData.backgroundColor"
+                            }
+                          ],
+                          staticClass:
+                            "rounded-md w-full border-gray-300 shadow text-sm focus:ring focus:ring-blue-300",
+                          attrs: {
+                            type: "text",
+                            placeholder: "ex. #000000 or rgb(1, 2, 3)"
+                          },
+                          domProps: { value: _vm.formData.backgroundColor },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.formData,
+                                "backgroundColor",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "w-1/3" }, [
+                      _c("label", { staticClass: "text-sm" }, [
+                        _vm._v("Border Color")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formData.borderColor,
+                              expression: "formData.borderColor"
+                            }
+                          ],
+                          staticClass:
+                            "rounded-md w-full border-gray-300 shadow text-sm focus:ring focus:ring-blue-300",
+                          attrs: {
+                            type: "text",
+                            placeholder: "ex. #000000 or rgb(1, 2, 3)"
+                          },
+                          domProps: { value: _vm.formData.borderColor },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.formData,
+                                "borderColor",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ])
+                ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "modal-body px-8 py-8" }, [
-                _vm._v("\n                Content goes here!\n            ")
+              _c("div", { staticClass: "bg-gray-200 rounded-b-lg p-4" }, [
+                _c("div", { staticClass: "flex justify-end items-center" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "bg-white px-4 py-2 rounded-md mr-3 shadow focus:outline-none focus:ring focus:ring-blue-300 hover:bg-gray-100",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.isModalVisible = false
+                        }
+                      }
+                    },
+                    [_vm._v("Cancel")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "bg-gray-400 text-gray-800 px-4 py-2 rounded-md shadow focus:outline-none focus:ring focus:ring-blue-300 hover:bg-gray-600 hover:text-gray-100",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.submit($event)
+                        }
+                      }
+                    },
+                    [_vm._v("Submit")]
+                  )
+                ])
               ])
-            ])
-          ]
-        )
-      ]
-    )
-  }
-]
+            ]
+          )
+        ]
+      )
+    : _vm._e()
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -47584,8 +47899,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/jonathonringeisen/www/booking-calendar/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/jonathonringeisen/www/booking-calendar/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! /Users/jringo/www/booking-calendar/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/jringo/www/booking-calendar/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })
