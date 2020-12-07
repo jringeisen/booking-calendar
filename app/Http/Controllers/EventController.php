@@ -48,7 +48,23 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'start_recur_date' => ['required'],
+            'end_recur_date' => ['required'],
+            'start_time' => ['required'],
+            'end_time' => ['required'],
+            'day_of_week' => ['required']
+        ]);
+
+        $event = $request->user()->events()->create($request->only([
+            'start_recur_date',
+            'end_recur_date',
+            'start_time',
+            'end_time',
+            'day_of_week'
+        ]));
+
+        return response()->json($event);
     }
 
     /**

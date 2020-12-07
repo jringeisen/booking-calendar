@@ -25,6 +25,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 
     Route::get('/events', [EventController::class, 'index']);
+    Route::post('/events', [EventController::class, 'store']);
 });
 
 require __DIR__.'/auth.php';

@@ -4,7 +4,7 @@ I'm building a embeddable booking calendar that a user can embed onto their site
 
 - [x] Create modal form to add times to calendar.
 - [x] Add ability to view recurring events.
-- [ ] Create post route for recurring events.
+- [x] Create post route for recurring events.
 - [ ] Create update route for recurring events.
 - [ ] Create delete route for recurring events.
 - [ ] Setup form validation for the modal.

@@ -10,36 +10,41 @@
                         <div class="w-1/2 mr-2">
                             <label class="text-sm">Start Recurring Date</label>
                             <div>
-                                <input type="date" v-model="formData.startRecur" class="rounded-md w-full border-gray-300 shadow text-sm text-gray-500 focus:ring focus:ring-blue-300" placeholder="Format 2020-01-01" />
+                                <input type="date" v-model="formData.start_recur_date" :class="{'border border-red-600': formErrors.start_recur_date}" class="rounded-md w-full border-gray-300 shadow text-sm text-gray-500 focus:ring focus:ring-blue-300" placeholder="Format 2020-01-01" />
                             </div>
+                            <p v-if="formErrors.start_recur_date" class="text-xs text-red-600">{{ formErrors.start_recur_date[0] }}</p>
                         </div>
                         <div class="w-1/2">
                             <label class="text-sm">End Recurring Date</label>
                             <div>
-                                <input type="date" v-model="formData.endRecur" class="rounded-md w-full border-gray-300 shadow text-sm text-gray-500 focus:ring focus:ring-blue-300" placeholder="Form 2020-01-01" />
+                                <input type="date" v-model="formData.end_recur_date" :class="{'border border-red-600': formErrors.end_recur_date}" class="rounded-md w-full border-gray-300 shadow text-sm text-gray-500 focus:ring focus:ring-blue-300" placeholder="Form 2020-01-01" />
                             </div>
+                            <p v-if="formErrors.end_recur_date" class="text-xs text-red-600">{{ formErrors.end_recur_date[0] }}</p>
                         </div>
                     </div>
                     <div class="flex items-center w-full mt-2">
                         <div class="w-1/2 mr-2">
                             <label class="text-sm">Start Time</label>
                             <div>
-                                <input type="time" v-model="formData.startTime" class="rounded-md w-full border-gray-300 shadow text-sm text-gray-500 focus:ring focus:ring-blue-300" placeholder="ex. 08:00:00 or 13:00:00" />
+                                <input type="time" v-model="formData.start_time" :class="{'border border-red-600': formErrors.start_time}" class="rounded-md w-full border-gray-300 shadow text-sm text-gray-500 focus:ring focus:ring-blue-300" placeholder="ex. 08:00:00 or 13:00:00" />
                             </div>
+                            <p v-if="formErrors.start_time" class="text-xs text-red-600">{{ formErrors.start_time[0] }}</p>
                         </div>
                         <div class="w-1/2">
                             <label class="text-sm">End Time</label>
                             <div>
-                                <input type="time" v-model="formData.endTime" class="rounded-md w-full border-gray-300 shadow text-sm text-gray-500 focus:ring focus:ring-blue-300" placeholder="Enter end time." />
+                                <input type="time" v-model="formData.end_time" :class="{'border border-red-600': formErrors.end_time}" class="rounded-md w-full border-gray-300 shadow text-sm text-gray-500 focus:ring focus:ring-blue-300" placeholder="Enter end time." />
                             </div>
+                            <p v-if="formErrors.end_time" class="text-xs text-red-600">{{ formErrors.end_time[0] }}</p>
                         </div>
                     </div>
                     <div class="flex items-center w-full mt-8">
                         <div class="w-1/3 mr-2">
                             <label class="text-sm">Day of week to be applied</label>
                             <div>
-                                <input type="number" v-model="formData.daysOfWeek" class="rounded-md w-full border-gray-300 shadow text-sm focus:ring focus:ring-blue-300" placeholder="Enter a number 0-6" />
+                                <input type="number" v-model="formData.day_of_week" :class="{'border border-red-600': formErrors.day_of_week}" class="rounded-md w-full border-gray-300 shadow text-sm focus:ring focus:ring-blue-300" placeholder="Enter a number 0-6" />
                             </div>
+                            <p v-if="formErrors.day_of_week" class="text-xs text-red-600">{{ formErrors.day_of_week[0] }}</p>
                         </div>
                         <div class="w-1/3 mr-2">
                             <label class="text-sm">Background Color</label>
@@ -79,6 +84,7 @@ export default {
     data () {
         return {
             formData: {},
+            formErrors: [],
             isModalVisible: false
         }
     },
@@ -92,6 +98,15 @@ export default {
     methods: {
         submit () {
             // submit to an endpoint and save in the database.
+            axios.post('/events', this.formData).then((response) => {
+                this.isModalVisible = false,
+                this.formErrors = [],
+                this.formData = {}
+            }).catch((errors) => {
+                if (errors.response.status === 422) {
+                    this.formErrors = errors.response.data.errors
+                }
+            })
         }
     }
 }
