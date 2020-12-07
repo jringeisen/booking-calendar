@@ -25,6 +25,7 @@ class EventController extends Controller
         // required for fullcalendar.
         $new_events = $events->map(function($item, $key) {
             return [
+                'id' => $item->id,
                 'daysOfWeek' => [$item->day_of_week],
                 'startRecur' => $item->start_recur_date,
                 'classNames' => 'cursor-pointer',
@@ -68,17 +69,6 @@ class EventController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Event  $event
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Event $event)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -87,7 +77,23 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //
+        $request->validate([
+            'start_recur_date' => ['required'],
+            'end_recur_date' => ['required'],
+            'start_time' => ['required'],
+            'end_time' => ['required'],
+            'day_of_week' => ['required']
+        ]);
+
+        $event->update($request->only([
+            'start_recur_date',
+            'end_recur_date',
+            'start_time',
+            'end_time',
+            'day_of_week'
+        ]));
+
+        return response()->json($event);
     }
 
     /**
@@ -98,6 +104,8 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        $event->delete();
+
+        return response()->json([], 204);
     }
 }

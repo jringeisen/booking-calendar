@@ -1,6 +1,7 @@
 <template>
 <div class="flex w-full">
     <add-to-calendar-modal />
+    <delete-event-modal />
     <FullCalendar :options="calendarOptions" />
 </div>
 </template>
@@ -9,11 +10,13 @@
 import FullCalendar from '@fullcalendar/vue'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import AddToCalendarModal from './AddToCalendarModal'
+import DeleteEventModal from './DeleteEventModal'
 
 export default {
   components: {
     FullCalendar,
-    AddToCalendarModal
+    AddToCalendarModal,
+    DeleteEventModal
   },
 
   data() {
@@ -61,8 +64,7 @@ export default {
       },
 
       handleEventClick (event) {
-          console.log(event)
-          alert('start: ' + event.event.startStr + ' end: ' + event.event.endStr)
+          this.$root.$emit('display::modal', {name: 'DeleteEventModal', event})
           // method to handle when an event has been clicked.
       },
 
@@ -71,7 +73,7 @@ export default {
       },
 
       addToCalendarClicked () {
-        this.$root.$emit('display::modal')
+        this.$root.$emit('display::modal', 'AddToCalendarModal')
       }
   }
 }

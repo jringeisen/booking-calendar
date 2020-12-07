@@ -85,4 +85,52 @@ class EventModelTest extends TestCase
         $response = $this->json('POST', '/events', $data, ['HTTP_X-Requested-With' => 'XMLHttpRequest'])
             ->assertOk();
     }
+
+    /**
+     * Event can be successfully updated.
+     * @test
+     *
+     * @return json
+     */
+    public function anEventCanBeSuccessfullyUpdated()
+    {        
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+
+        $event = Event::factory()->create();
+
+        $data = [
+            'start_recur_date' => $event->start_recur_date,
+            'end_recur_date' => $event->end_recur_date,
+            'start_time' => '15:00:00',
+            'end_time' => '16:00:00',
+            'day_of_week' => $event->day_of_week
+        ];
+
+        $response = $this->json('PUT', "/events/$event->id", $data, ['HTTP_X-Requested-With' => 'XMLHttpRequest'])
+            ->assertOk()
+            ->assertJsonFragment([
+                'start_time' => '15:00:00',
+                'end_time' => '16:00:00'
+            ]);
+    }
+
+    /**
+     * Event can be successfully deleted.
+     * @test
+     *
+     * @return json
+     */
+    public function anEventCanBeSuccessfullyDeleted()
+    {        
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+
+        $event = Event::factory()->create();
+
+        $response = $this->json('DELETE', "/events/$event->id", ['HTTP_X-Requested-With' => 'XMLHttpRequest'])
+            ->assertNoContent(204);
+    }
 }

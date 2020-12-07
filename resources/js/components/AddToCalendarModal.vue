@@ -73,6 +73,7 @@
 
 <script>
 export default {
+    name: 'AddToCalendarModal',
     props: {
         size: {
             type: String,
@@ -90,8 +91,10 @@ export default {
     },
 
     mounted () {
-        this.$root.$on('display::modal', () => {
-            this.isModalVisible = true
+        this.$root.$on('display::modal', (payload) => {
+            if (payload === this.$options.name) {
+                this.isModalVisible = true
+            }
         })
     },
 
