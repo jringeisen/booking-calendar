@@ -58,7 +58,8 @@ export default {
         submit () {
             // submit to an endpoint and save in the database.
             axios.delete(`/events/${this.eventId}`).then((response) => {
-                console.log('success!')
+                this.isModalVisible = false
+                this.$root.$emit('update::events')
             })
         }
     }

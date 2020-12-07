@@ -104,7 +104,8 @@ export default {
             axios.post('/events', this.formData).then((response) => {
                 this.isModalVisible = false,
                 this.formErrors = [],
-                this.formData = {}
+                this.formData = {},
+                this.$root.$emit('update::events')
             }).catch((errors) => {
                 if (errors.response.status === 422) {
                     this.formErrors = errors.response.data.errors

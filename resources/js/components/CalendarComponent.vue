@@ -2,7 +2,7 @@
 <div class="flex w-full">
     <add-to-calendar-modal />
     <delete-event-modal />
-    <FullCalendar :options="calendarOptions" />
+    <FullCalendar ref="calendar" :options="calendarOptions" />
 </div>
 </template>
 
@@ -52,20 +52,25 @@ export default {
     }
   },
 
+  mounted () {
+    // Refetch calendar events when and event has been created, updated, 
+    // or deleted.
+    this.$root.$on('update::events', () => {
+      this.$refs.calendar.getApi().refetchEvents()
+    })
+  },
+
   methods: {
       handleDateClick (date) {
-          alert(date.dateStr)
           // handle the date click.
       },
 
       handleEventDrop (event) {
-          console.log(event)
           // method to handle when an event has been dropped.
       },
 
       handleEventClick (event) {
           this.$root.$emit('display::modal', {name: 'DeleteEventModal', event})
-          // method to handle when an event has been clicked.
       },
 
       handleDrop (data) {
