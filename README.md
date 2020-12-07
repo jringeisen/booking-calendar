@@ -7,5 +7,5 @@ I'm building a embeddable booking calendar that a user can embed onto their site
 - [x] Create post route for recurring events.
 - [ ] Create update route for recurring events.
 - [ ] Create delete route for recurring events.
-- [ ] Setup form validation for the modal.
+- [x] Setup form validation for the modal.
 - [ ] Add ability to generate code snippet to be able to embed the calendar.
