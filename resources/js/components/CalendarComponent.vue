@@ -18,7 +18,7 @@ export default {
 
   data() {
     return {
-      events: {},
+      events: [],
       isVisible: false,
       calendarOptions: {
         plugins: [ dayGridPlugin ],
@@ -44,19 +44,7 @@ export default {
           second: '2-digit',
           hour12: true
         },
-        events: [
-          {
-            daysOfWeek: [ '1' ],
-            classNames: 'cursor-pointer',
-            startRecur: '2020-12-01',
-            endRecur: '2020-12-30',
-            startTime: '08:00:00',
-            endTime: '09:00:00',
-            display: 'block',
-            backgroundColor: 'rgba(139, 92, 246, var(--tw-bg-opacity))',
-            borderColor: 'rgba(139, 92, 246, var(--tw-bg-opacity))'
-          }
-        ]
+        events: '/events'
       }
     }
   },
